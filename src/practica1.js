@@ -9,9 +9,6 @@ var index = 0;
 
 var primitives = [];
 
-var p1;
-var p2;
-
 var colors = [
     vec4( 0.0, 0.0, 0.0, 1.0 ),  // black
     vec4( 1.0, 0.0, 0.0, 1.0 ),  // red
