@@ -63,7 +63,6 @@ class Point{
         gl.vertexAttribPointer( vertexSize, 1, gl.FLOAT, false, 0, 0 );
         gl.enableVertexAttribArray( vertexSize );
 
-
         gl.drawArrays( gl.POINTS, 0, index );
         
     }

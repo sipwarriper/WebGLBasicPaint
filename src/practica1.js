@@ -9,8 +9,11 @@ var index = 0;
 
 var primitives = [];
 
+var colorPicker;
+
 var colors = [
     vec4( 0.0, 0.0, 0.0, 1.0 ),  // black
+    vec4( 1.0, 1.0, 1.0, 1.0 ), //white
     vec4( 1.0, 0.0, 0.0, 1.0 ),  // red
     vec4( 1.0, 1.0, 0.0, 1.0 ),  // yellow
     vec4( 0.0, 1.0, 0.0, 1.0 ),  // green
@@ -20,9 +23,15 @@ var colors = [
 ];
 
 var drawing_mode=0;
+const point = 0; //point primitive position in the primitives array
 
 window.onload = function init() {
     canvas = document.getElementById( "gl-canvas" );
+
+    colorPicker = document.getElementById( "colorPicker" );
+
+    colorPicker.addEventListener("change", changeColor, false);
+
 
     gl = WebGLUtils.setupWebGL( canvas );
 
@@ -31,7 +40,7 @@ window.onload = function init() {
 	var slider = document.getElementById("slider_point_size");
 	
 	slider.oninput = function() {
-		primitives[0].changeSize(this.value);
+		primitives[point].changeSize(this.value);
 	} 
 	
     canvas.addEventListener("mousedown", function(event){
@@ -56,8 +65,7 @@ window.onload = function init() {
     primitives.push(new Point(200,gl, colors[1], slider.value, program));
     primitives.push(new Line(200,gl, colors[1], program, "default"));
     primitives.push(new Triangle(200,gl, colors[1], program, "default"));
-    
-	
+
 
     render();
 }
@@ -89,4 +97,24 @@ function reset(){
 	for(var i = 0; i<primitives.length; i++){
         primitives[i].reset();
     }
+}
+
+
+function changeColor(event){
+    var cObj = w3color(event.target.value);
+    
+    let r = cObj.red/255;
+    let g = cObj.green/255;
+    let b = cObj.blue/255;
+    let o = cObj.opacity;
+
+
+
+    for(var i = 0; i<primitives.length; i++){
+        primitives[i].changeColor(r, g, b, o);
+    }
+
+
+    console.log(r, g, b, o);
+        
 }
