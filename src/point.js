@@ -1,26 +1,26 @@
 class Point{
     constructor(MaxElements, gl, initialColor, initialSize, program){
-      this.MaxVertexs = MaxElements;
-      this.gl=gl;
-      this.program=program;
-      this.currentColor=flatten(initialColor);
-      this.size=new Float32Array([initialSize]);
-      this.index=0;
-      //buffer with the positions
-      this.vertexBuffer=gl.createBuffer();
-      gl.bindBuffer( gl.ARRAY_BUFFER, this.vertexBuffer );
-      gl.bufferData( gl.ARRAY_BUFFER,this.MaxVertexs*8, gl.STATIC_DRAW );
+		this.MaxVertexs = MaxElements;
+		this.gl=gl;
+		this.program=program;
+		this.currentColor=flatten(initialColor);
+		this.size=new Float32Array([initialSize]);
+		this.index=0;
       
-      //buffer with the colors
-      this.colorBuffer=gl.createBuffer();
-      gl.bindBuffer( gl.ARRAY_BUFFER, this.colorBuffer );
-      gl.bufferData( gl.ARRAY_BUFFER,this.MaxVertexs*16, gl.STATIC_DRAW );
+		//buffer with the positions
+		this.vertexBuffer=gl.createBuffer();
+		gl.bindBuffer( gl.ARRAY_BUFFER, this.vertexBuffer );
+		gl.bufferData( gl.ARRAY_BUFFER,this.MaxVertexs*8, gl.STATIC_DRAW );
 
-      //buffer with the size off each point
-      this.sizeBuffer=gl.createBuffer();
-      gl.bindBuffer( gl.ARRAY_BUFFER, this.sizeBuffer );
-      gl.bufferData( gl.ARRAY_BUFFER,this.MaxVertexs*4, gl.STATIC_DRAW );      
+		//buffer with the colors
+		this.colorBuffer=gl.createBuffer();
+		gl.bindBuffer( gl.ARRAY_BUFFER, this.colorBuffer );
+		gl.bufferData( gl.ARRAY_BUFFER,this.MaxVertexs*16, gl.STATIC_DRAW );
 
+		//buffer with the size off each point
+		this.sizeBuffer=gl.createBuffer();
+		gl.bindBuffer( gl.ARRAY_BUFFER, this.sizeBuffer );
+		gl.bufferData( gl.ARRAY_BUFFER,this.MaxVertexs*4, gl.STATIC_DRAW );  
     }
 
     add(x, y){
@@ -67,6 +67,28 @@ class Point{
         gl.drawArrays( gl.POINTS, 0, index );
         
     }
+	
+	reset(){
+		//no és imprescindible...
+		gl.deleteBuffer(this.vertexBuffer);
+		gl.deleteBuffer(this.colorBuffer);
+		gl.deleteBuffer(this.sizeBuffer);
+		
+		//buffer with the positions
+		this.vertexBuffer=gl.createBuffer();
+		gl.bindBuffer( gl.ARRAY_BUFFER, this.vertexBuffer );
+		gl.bufferData( gl.ARRAY_BUFFER,this.MaxVertexs*8, gl.STATIC_DRAW );
+
+		//buffer with the colors
+		this.colorBuffer=gl.createBuffer();
+		gl.bindBuffer( gl.ARRAY_BUFFER, this.colorBuffer );
+		gl.bufferData( gl.ARRAY_BUFFER,this.MaxVertexs*16, gl.STATIC_DRAW );
+
+		//buffer with the size off each point
+		this.sizeBuffer=gl.createBuffer();
+		gl.bindBuffer( gl.ARRAY_BUFFER, this.sizeBuffer );
+		gl.bufferData( gl.ARRAY_BUFFER,this.MaxVertexs*4, gl.STATIC_DRAW );     
+	}
 
     
 }

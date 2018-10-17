@@ -1,20 +1,21 @@
 class Line{
     constructor(MaxElements, gl, initialColor, program, linetype){
-      this.MaxVertexs = MaxElements*2;
-      this.gl=gl;
-      this.program=program;
-      this.currentColor=flatten(initialColor);
-      this.index=0;
-      this.type=linetype;
-      //buffer with the positions
-      this.vertexBuffer=gl.createBuffer();
-      gl.bindBuffer( gl.ARRAY_BUFFER, this.vertexBuffer );
-      gl.bufferData( gl.ARRAY_BUFFER,this.MaxVertexs*8, gl.STATIC_DRAW );
-      
-      //buffer with the colors
-      this.colorBuffer=gl.createBuffer();
-      gl.bindBuffer( gl.ARRAY_BUFFER, this.colorBuffer );
-      gl.bufferData( gl.ARRAY_BUFFER,this.MaxVertexs*16, gl.STATIC_DRAW );  
+		this.MaxVertexs = MaxElements*2;
+		this.gl=gl;
+		this.program=program;
+		this.currentColor=flatten(initialColor);
+		this.index=0;
+		this.type=linetype;
+		
+		//buffer with the positions
+		this.vertexBuffer=gl.createBuffer();
+		gl.bindBuffer( gl.ARRAY_BUFFER, this.vertexBuffer );
+		gl.bufferData( gl.ARRAY_BUFFER,this.MaxVertexs*8, gl.STATIC_DRAW );
+
+		//buffer with the colors
+		this.colorBuffer=gl.createBuffer();
+		gl.bindBuffer( gl.ARRAY_BUFFER, this.colorBuffer );
+		gl.bufferData( gl.ARRAY_BUFFER,this.MaxVertexs*16, gl.STATIC_DRAW );  
     }
 
     add(x, y){
@@ -57,5 +58,21 @@ class Line{
                 break;
 
         }        
-    }    
+    }
+
+	reset(){
+		//no és imprescindible...
+		gl.deleteBuffer(this.vertexBuffer);
+		gl.deleteBuffer(this.colorBuffer);
+		
+		//buffer with the positions
+		this.vertexBuffer=gl.createBuffer();
+		gl.bindBuffer( gl.ARRAY_BUFFER, this.vertexBuffer );
+		gl.bufferData( gl.ARRAY_BUFFER,this.MaxVertexs*8, gl.STATIC_DRAW );
+
+		//buffer with the colors
+		this.colorBuffer=gl.createBuffer();
+		gl.bindBuffer( gl.ARRAY_BUFFER, this.colorBuffer );
+		gl.bufferData( gl.ARRAY_BUFFER,this.MaxVertexs*16, gl.STATIC_DRAW );  
+	}
 }

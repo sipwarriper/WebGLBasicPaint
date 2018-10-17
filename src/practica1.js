@@ -84,3 +84,9 @@ function line_func(){
 function triangle_func(){
     drawing_mode = 2;
 }
+
+function reset(){
+	for(var i = 0; i<primitives.length; i++){
+        primitives[i].reset();
+    }
+}
