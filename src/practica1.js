@@ -28,6 +28,12 @@ window.onload = function init() {
 
     if ( !gl ) { alert( "WebGL isn't available" ); }
 
+	var slider = document.getElementById("slider_point_size");
+	
+	slider.oninput = function() {
+		primitives[0].changeSize(this.value);
+	} 
+	
     canvas.addEventListener("mousedown", function(event){
 
 
@@ -47,12 +53,11 @@ window.onload = function init() {
     gl.useProgram( program );
 
     
-    primitives.push(new Point(200,gl, colors[1], 10.0, program));
+    primitives.push(new Point(200,gl, colors[1], slider.value, program));
     primitives.push(new Line(200,gl, colors[1], program, "default"));
     primitives.push(new Triangle(200,gl, colors[1], program, "default"));
     
-    
-
+	
 
     render();
 }
