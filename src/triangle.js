@@ -1,11 +1,11 @@
 class Triangle{
-    constructor(MaxElements, gl, initialColor, program, linetype){
+    constructor(MaxElements, gl, initialColor, program, triangletype){
 		this.MaxVertexs = MaxElements*3;
 		this.gl=gl;
 		this.program=program;
 		this.currentColor=flatten(initialColor);
 		this.index=0;
-		this.type=linetype;
+		this.type=triangletype;
 		
 		//buffer with the positions
 		this.vertexBuffer=gl.createBuffer();

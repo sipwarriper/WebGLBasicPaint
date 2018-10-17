@@ -65,6 +65,10 @@ window.onload = function init() {
     primitives.push(new Point(200,gl, colors[1], slider.value, program));
     primitives.push(new Line(200,gl, colors[1], program, "default"));
     primitives.push(new Triangle(200,gl, colors[1], program, "default"));
+    primitives.push(new Line(200,gl, colors[1], program, "strip"));
+    primitives.push(new Line(200,gl, colors[1], program, "loop"));
+    primitives.push(new Triangle(200,gl, colors[1], program, "strip"));
+    primitives.push(new Triangle(200,gl, colors[1], program, "fan"));
 
 
     render();
@@ -91,6 +95,18 @@ function line_func(){
 
 function triangle_func(){
     drawing_mode = 2;
+}
+function line2_func(){
+    drawing_mode = 3;
+}
+function line3_func(){
+    drawing_mode = 4;
+}
+function triangle2_func(){
+    drawing_mode = 5;
+}
+function triangle3_func(){
+    drawing_mode = 6;
 }
 
 function reset(){
