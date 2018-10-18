@@ -19,14 +19,15 @@ class Line{
     }
 
     add(x, y){
+    	console.log(this.index);
         let pos = vec2(x,y);
         gl.bindBuffer( gl.ARRAY_BUFFER, this.vertexBuffer );
-        gl.bufferSubData(gl.ARRAY_BUFFER, 8*index, flatten(pos));
+        gl.bufferSubData(gl.ARRAY_BUFFER, 8*this.index, flatten(pos));
 
         gl.bindBuffer(gl.ARRAY_BUFFER, this.colorBuffer);
-        gl.bufferSubData(gl.ARRAY_BUFFER, 16*index, flatten(this.currentColor));
+        gl.bufferSubData(gl.ARRAY_BUFFER, 16*this.index, flatten(this.currentColor));
 
-        index++;
+        this.index++;
 
     }
 
@@ -48,13 +49,13 @@ class Line{
 
         switch (this.type){
             case "strip":
-                gl.drawArrays( gl.LINE_STRIP, 0, index );
+                gl.drawArrays( gl.LINE_STRIP, 0, this.index );
                 break;
             case "loop":
-                gl.drawArrays( gl.LINE_LOOP, 0, index );
+                gl.drawArrays( gl.LINE_LOOP, 0, this.index );
                 break;
             default:
-                gl.drawArrays( gl.LINES, 0, index );
+                gl.drawArrays( gl.LINES, 0, this.index );
                 break;
 
         }        
@@ -74,5 +75,6 @@ class Line{
 		this.colorBuffer=gl.createBuffer();
 		gl.bindBuffer( gl.ARRAY_BUFFER, this.colorBuffer );
 		gl.bufferData( gl.ARRAY_BUFFER,this.MaxVertexs*16, gl.STATIC_DRAW );  
+		this.index=0;
 	}
 }

@@ -26,15 +26,15 @@ class Point{
     add(x, y){
         let pos = vec2(x,y);
         gl.bindBuffer( gl.ARRAY_BUFFER, this.vertexBuffer );
-        gl.bufferSubData(gl.ARRAY_BUFFER, 8*index, flatten(pos));
+        gl.bufferSubData(gl.ARRAY_BUFFER, 8*this.index, flatten(pos));
 
         gl.bindBuffer(gl.ARRAY_BUFFER, this.colorBuffer);
-        gl.bufferSubData(gl.ARRAY_BUFFER, 16*index, flatten(this.currentColor));
+        gl.bufferSubData(gl.ARRAY_BUFFER, 16*this.index, flatten(this.currentColor));
 
         gl.bindBuffer(gl.ARRAY_BUFFER, this.sizeBuffer);
-        gl.bufferSubData(gl.ARRAY_BUFFER, 4*index, this.size);
+        gl.bufferSubData(gl.ARRAY_BUFFER, 4*this.index, this.size);
 
-        index++;
+        this.index++;
 
     }
 
@@ -63,7 +63,7 @@ class Point{
         gl.vertexAttribPointer( vertexSize, 1, gl.FLOAT, false, 0, 0 );
         gl.enableVertexAttribArray( vertexSize );
 
-        gl.drawArrays( gl.POINTS, 0, index );
+        gl.drawArrays( gl.POINTS, 0, this.index );
         
     }
 	
